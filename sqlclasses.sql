@@ -52,6 +52,77 @@ select * from country where indepyear=1984;
                     type of dbms and write a brief about it .
 */
 
+-- operators in SQL
+select * from country where indepyear >= 1947;
+use world;
+select * from country where indepyear >= 1947;
+
+show tables;
+
+-- while giving where we should use '' for String and for integer no quotes are requred
+select * from country where continent='Asia';
+select * from country where indepyear=1991;
+select name,continent from country where indepyear=1991;
 
 
+-- in operator use to find values which match to it --> in (x,x,x)
+select * from country where continent in ('Africa' , 'Asia');
+select * from country where continent not in ('Africa' , 'Asia');
+select * from country where indepyear in(1960,1991);
+select * from country where indepyear not in(1960,1991);
+
+
+-- between operator is use to find values between them including given values 
+-- syntax between values1 and value2
+-- isse inke bech ki value milegi aur jo value di h vo bhi milegi 
+select * from country where indepyear between 1960 and 1991;
+select * from country where indepyear not between 1960 and 1991;
+
+
+-- Q1 
+select name,continent from country where continent not in ('Southern Europe')  ;
+
+-- Q2
+select name,continent ,population ,population+(0.1*population) as '10%' from country;
+
+-- Q3
+select * from country where LifeExpectancy in (75.1,77.8,63.7);
+
+-- Q4
+select name ,population , region from country where population not between 5000 and 300000;
+/*
+-- like operator 
+match a pattern 
+name => letter start , letter include , letter end 
+special characters => %(wildcard charcter) zero or more character
+%a -last word a hona chiye
+a% - starting a hona chiye 
+%a% - puri string me a kahi bhi ho   
+*/
+select * from country  where name like '%ra%';
+select * from country  where name not like '%ra%';
+
+/*
+(underScrore ) : only  1 character 
+*/
+
+select * from country where name like '____';
+select * from country where name like '_u__';
+select * from country where name like '_u%';
+select * from country where name like '__u%a%_';
+
+-- Q1
+select name , continent from country where continent like 'n%';
+
+-- Q2 
+select name , continent from country where continent like '%p_';
+
+-- Q3
+select name ,continent from country where continent like '____';
+
+-- Q4
+select name , continent,region  from country where region like '_a%a_';
+
+-- Q5
+select name ,continent,region from country where region like'__c'; 
 
