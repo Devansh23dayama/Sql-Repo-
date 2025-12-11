@@ -59,7 +59,7 @@ select * from country where indepyear >= 1947;
 
 show tables;
 
--- while giving where we should use '' for String and for integer no quotes are requred
+-- while giving "WHERE" we should use '' for String and for integer no quotes are requred
 select * from country where continent='Asia';
 select * from country where indepyear=1991;
 select name,continent from country where indepyear=1991;
@@ -124,5 +124,22 @@ select name ,continent from country where continent like '____';
 select name , continent,region  from country where region like '_a%a_';
 
 -- Q5
-select name ,continent,region from country where region like'__c'; 
+select name ,continent,region from country where region like'__c%sia'; 
 
+-- Q6
+select name,region,continent from country where continent in('North America','South America');
+
+-- concat_ws('$',name,code) from country;
+-- concat(name,code)
+select name,code,concat(name,'$',code),concat_ws('$',name,code,'dev') from country;
+
+
+select name,code,concat(name,' ',code) from country where concat(name,' ',code)='Afghanistan AFG';
+
+select name,region,continent from country where region like concat('%',continent);
+
+select * from country where name=region ;
+-- to take out first character of string 
+-- left(name,1)
+
+select name , continent, population from country where left(continent,1)=left(name,1);  
