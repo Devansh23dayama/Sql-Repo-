@@ -143,3 +143,44 @@ select * from country where name=region ;
 -- left(name,1)
 
 select name , continent, population from country where left(continent,1)=left(name,1);  
+
+
+
+-- functions String 
+-- select name,substr(name,2) from country;
+select name,substr(name,2) from country;
+use world;
+select name,substr(name,2) from country;
+
+-- substr(name,2,4)
+select name,substr(name,2,4) from country;
+
+-- substr(name-1,4)
+select name,substr(name,-2,4) from country;
+
+select name ,continent ,substr(name,1,1),substr(continent,1,1)from  country where substr(name,1,1)=substr(continent,1,1);
+select name ,population ,substr(name,1,3) from country where substr(name,1,3)='ALG';
+
+
+-- select name,instr(name,'e') from country 
+-- return first occurance of character.
+select name,instr(name,'e') from country ;
+
+-- select name , char_length(name) from country;--> return characters length 
+select name , char_length(name) from country;
+
+-- trim
+select char_length('       devansh         ');
+select trim('       devansh         ');
+select char_length(trim('       devansh         '));
+
+-- rtrim -->remove right side spaces 
+-- ltrim -->remove left side spaces 
+
+
+select name ,trim(both 'a' from trim(both 'A' from name )) from country;
+
+
+-- lpad and rpad 
+-- when we want to define a column with fixed size 
+select name , population ,rpad(population,5,#) from country;
