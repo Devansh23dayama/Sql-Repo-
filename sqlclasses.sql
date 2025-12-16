@@ -178,9 +178,76 @@ select char_length(trim('       devansh         '));
 -- ltrim -->remove left side spaces 
 
 
-select name ,trim(both 'a' from trim(both 'A' from name )) from country;
+SELECT 
+    name, TRIM(BOTH 'a' FROM TRIM(BOTH 'A' FROM name))
+FROM
+    country;
 
 
 -- lpad and rpad 
+select name,population
 -- when we want to define a column with fixed size 
-select name , population ,rpad(population,5,#) from country;
+
+-- select name , population ,rpad(population,5,#) from country;
+-- numeric Functions 
+-- 1. round()
+use world;
+select lifeexpectancy,round(lifeexpectancy) from country;
+select 30.68,round(30.68,1);
+select 5000.0000 , round(457.68,1),truncate(3653.68,1);
+
+-- add date function => default date add,(month ,year ,time )
+select now() , current_timestamp(),current_date(),current_time();
+
+-- aggregate function ,what are relationships in SQL
+
+
+
+/* ! classs left */
+
+
+
+
+
+
+
+
+
+
+use world;
+select sum(population) from country ;
+-- where 
+select continent, count(name) from country group by continent;
+select count(name) from country Where continent ='Asia' and indepyear<1950;
+select continent ,count(name) from country where indepyear>1950 group by continent;
+select continent ,count(name) from country where count(name)>30 group by continent;  -- wrong due to down given point 
+-- where me vo hi data filter hoga jo aapki physical table me present hoga 
+
+
+-- having hamesha aggregating function ke uapr lagta h 
+select continent , count(name) from country  group by continent  having count(name)> 30;
+
+
+--  Q in each continent  total population
+
+select continent ,sum(population)  from country group by continent;
+
+-- total population is greater than 100 
+
+select continent ,sum (population) from country group by continent having 
+sum(population) >300000; 
+
+select indepyear,count(name) from country where indepyear >1930 group by indepyear ;
+select indepyear , count (name ) from country where indepyear> 1930 group by indepyear having count(name) > 2;
+
+
+-- Q  you need to get govt form and the total no coubntry for each govy form whwere the total no country should be greater thAN 20 
+-- Q  you need to get govt form and the total no coubntry for each govy form where the country should capital greater than 30  
+-- Q  get the no of country and  regions with the total population where the life expenteancy shouuld be greater than 38 and populatiopn in each continent should be greater than 3 lakh 
+select * from country  ;
+select GovernmentForm,count(name) from country group by GovernmentForm having count(name)> 20 ;
+
+select GovernmentForm , count(name) from country  Where capital > 30 group by GovernmentForm;
+select continent, count(name) , count(region) ,sum(population) from country where lifeExpectancy >38 group by continent having sum(population ) > 300000;
+
+
