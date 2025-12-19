@@ -251,3 +251,82 @@ select GovernmentForm , count(name) from country  Where capital > 30 group by Go
 select continent, count(name) , count(region) ,sum(population) from country where lifeExpectancy >38 group by continent having sum(population ) > 300000;
 
 
+
+-- Structure :- how to organize 
+
+-- types :- 1--> conceptual-> Entity and Attribute 
+           -- 2-->  Logical --> conceptual + Relationship 
+           -- 3-->  Physical--> physical ,table ,column 
+           
+           
+           /*
+           Types of relationship 
+          1. one to one 
+          2. one to many 
+          3. many to one 
+		  4.many to many 
+           
+           
+           Primary key uniquely identifies records in a table.(no null ,no redundancy)
+           foreign key connects one table to another by referencing the primary key.(can be null and redundancy possible)
+         
+                          (foriegn key )                   (primarykey)
+           oid   producct  cid                                     cid cname
+           101    A
+           102    B
+           103    C
+           103    A
+           104    D
+           104    E
+           104    F
+           
+           
+           */
+			
+
+             use world ;
+             -- city table ID is my primary key , and country code is the foriegn key 
+             select * from city;
+             describe city;
+             select count(code),count(distinct code) from country ;
+             
+             
+             -- join is use to connect two tables in SQL
+             -- use to create alias name
+             
+             select cy.id,cy.name,cy.countrycode ,cnt.code,cnt.name,cnt.continent from city as cy 
+             join country as cnt where cy.countrycode= cnt.code;
+             
+             
+             
+             select cnt.code,cnt.name,cnt.continent from country as cnt;
+             
+             
+             -- find the city name ,population ,country name along with the govt form  for each city 
+             desc city ;
+             select ct.name ,ct.population,ctry.name,ctry.governmentform  from city as ct
+             join
+             country as ctry
+             where ct.countrycode=ctry.code;
+             select ctry.name,ctry.governmentform from country as ctry;
+             
+             
+             -- get the country nmae ,population and the language spoken with percentage of each langugae 
+             desc country;
+             select ctry.name,ctry.population,clang.language,clang.percentage from country as ctry
+             join 
+             countrylanguage as clang where
+             ctry.code=clang.countrycode;
+             
+             
+             select clang.language,clang.percentage from countrylanguage as clang;
+             
+             
+             
+             
+             
+             
+             
+             
+             
+             
