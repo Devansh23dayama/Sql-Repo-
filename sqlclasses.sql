@@ -326,7 +326,102 @@ select continent, count(name) , count(region) ,sum(population) from country wher
              
              
              
+use sakila;
+select * from actor ;
+select * from film_actor;
+select count(distinct film_id),count(distinct actor_id) from film_actor;
+select count(film_id),count(distinct film_id) from film_actor;
+select count( actor_id),count(distinct actor_id) from film_actor;
+
+
+select a.first_name,a.actor_id from actor as a join film_actor as fa
+where a.actor_id=fa.actor_id;
+desc Film_actor;
+select fa.film_id,fa.actor_id,f.film_id,f.title from film_actor as fa join film as f where fa.film_id = f.film_id;
+
+-- actor name ,in which movie he work 
+select * from film_actor;
+desc film_actor;
+select * from film;
+
+-- what are inner joins ,what are outer joins types of outer joins --> learning assignment 
+select * from actor;
+             
+             CREATE DATABASE REGEX;
+USE REGEX;
+
+CREATE TABLE customers (
+    customer_id INT PRIMARY KEY,
+    customer_name VARCHAR(50),
+    city VARCHAR(50)
+);
+
+CREATE TABLE orders (
+    order_id INT PRIMARY KEY,
+    customer_id INT,
+    order_date DATE,
+    amount DECIMAL(10,2)
+);
+
+
+INSERT INTO customers (customer_id, customer_name, city) VALUES
+(1, 'Alice', 'New York'),
+(2, 'Bob', 'Los Angeles'),
+(3, 'Charlie', 'Chicago'),
+(4, 'David', 'Houston'),
+(5, 'Eva', 'Phoenix'),
+(6, 'Frank', 'Philadelphia'),
+(7, 'Grace', 'San Antonio'),
+(8, 'Henry', 'San Diego'),
+(9, 'Ivy', 'Dallas'),
+(10, 'Jack', 'San Jose');
+
+
+INSERT INTO orders (order_id, customer_id, order_date, amount) VALUES
+(101, 1, '2024-01-05', 250.00),
+(102, 2, '2024-01-06', 150.00),
+(103, 3, '2024-01-07', 300.00),
+(104, 1, '2024-01-10', 120.00),
+(105, 5, '2024-01-12', 450.00),
+(106, 6, '2024-01-15', 200.00),
+(107, 2, '2024-01-18', 175.00),
+(108, 8, '2024-01-20', 500.00),
+(109, 11, '2024-01-22', 90.00),
+(110, 12, '2024-01-25', 60.00);
              
              
+             select c.customer_id,c.customer_name,o.amount,o.order_date from customers as c 
+             inner join orders as o where c.customer_id = o.customer_id;  
+             -- ineer join where some colums are common in both 
+             
+             -- new syntax for inner join 
+             select c.customer_id,c.customer_name,o.amount,o.order_date from customers as c 
+             inner join orders as o on c.customer_id = o.customer_id;  
+             -- in this in place of where ---> on is there
              
              
+             -- left outer join 
+             select c.customer_id,c.customer_name ,o.order_id,o.amount ,o.customer_id from customers as c left join orders as o  on customer_id= o.customer_id;
+             
+             -- right outer join 
+             select c.customer_id,c.customer_name ,o.order_id,o.amount ,o.customer_id from customers as c right join   orders as o  on c.customer_id= o.customer_id;
+             
+             -- natural join 
+             -- no condition is define here , on common column join will be done 
+          
+             
+             alter table customers rename column customer_id to cid ;
+             
+             desc customers;
+   -- in natural join if it did't find any common column then there will be cross join (many to many )
+   alter table customers rename column cid to customer_id ;
+   
+   
+select a.actor_id,a.first_name ,count(f.film_id) from actor as a join film_actor as f where a.actor_id =f.actor_id group by actor_id;
+
+
+-- what is normaization in sql 
+-- super key ,primary key , candidate key 
+-- what is 1 nf ,2nf , 3nf
+-- outer joins and self joins 
+ (partial dependency )
