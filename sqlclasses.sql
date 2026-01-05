@@ -391,7 +391,7 @@ INSERT INTO orders (order_id, customer_id, order_date, amount) VALUES
              
              
              select c.customer_id,c.customer_name,o.amount,o.order_date from customers as c 
-             inner join orders as o where c.customer_id = o.customer_id;  
+             inner join orders as o on c.customer_id = o.customer_id;  
              -- ineer join where some colums are common in both 
              
              -- new syntax for inner join 
@@ -518,4 +518,66 @@ INSERT INTO enrollments (enrollment_id, student_id, course_name, credits) VALUES
 -- find  no of courses enroll in each group name
 
 select char_length(s.student_name),count(e.enrollment_id) from students as s join enrollments as e on s.student_id=e.student_id group by char_length(Student_name)
-order by count
+order by count;
+
+
+-- self join
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- SubQuery
+
+
+
+use Sakila;
+select * from payment where payment_id=5;
+select * from payment where amount =9.99;
+
+-- using Subquery 
+select * from payment where amount =(select * from payment where payment_id=5);
+
+-- get payment id and amount where amt is not equals to amt of payment id =23;
+select payment_id ,amount from payment;
+select payment_id ,amount from payment where payment_id !=23;
+
+select payment_id ,amount from payment where amount!=(select amount from payment where payment_id =23);
+
+
+-- ques 
+select month(payment_date)from payment where payment_id =6;
+select * from payment;
+select payment_id,customer_id,amount,payment_date from payment where month(payment_date)=(select month(payment_date)from payment where payment_id =6);
+-- ques 
+select staff_id from payment where payment_id = 7;
+select * from payment where staff_id=(select staff_id from payment where payment_id = 7);
+
+
+-- ques
+select max(amount) from payment ;
+select * from payment where amount =11.99;
+select * from payment where amount =(select max(amount) from payment);
+
+-- ques 
+select amount from payment where rental_id =1725;
+
+select amount ,count(payment_id) from payment where amount <(select amount from payment where rental_id =1725) group by amount ;
+
+-- ques 
+select month(payment_date) from payment where customer_id=1 && payment_id=3;
+
+select month(payment_date),sum(amount) from payment where month(payment_date)>(select month(payment_date)from payment where customer_id=1 and payment_id=3) group by month(payment_date);
+
