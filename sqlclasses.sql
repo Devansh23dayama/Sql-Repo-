@@ -581,3 +581,25 @@ select month(payment_date) from payment where customer_id=1 && payment_id=3;
 
 select month(payment_date),sum(amount) from payment where month(payment_date)>(select month(payment_date)from payment where customer_id=1 and payment_id=3) group by month(payment_date);
 
+-- Any with comparision Operator 
+select * from payment where amount >=any (select amount from payment where payment_id= 3 or payment_id=2);
+select * from payment where amount >any (select amount from payment where payment_id= 3 or payment_id=2);
+
+-- all with comparision operator
+select * from payment where amount >all (select amount from payment where payment_id= 3 or payment_id=2);
+select * from payment where amount <all (select amount from payment where payment_id= 3 or payment_id=2);
+
+
+-- ques :- get all the payment info where the month of payment should be same as of payment id 2 or 3 
+-- ques :- get all tbhe payment info whose amt is larger than amoung all the amt of payment id 2 to  8 
+
+
+-- ques 1
+select * from payment where month(payment_date)In (select month(payment_date) from payment where payment_id=2 or payment_id=3);
+
+-- ques 2 
+select * from payment where amount >all(select amount from payment where payment_id=2 or payment_id=3);
+
+-- learning assignment 
+-- what are corelated subQuery and how they are executed 
+-- what are constraints in sql 
