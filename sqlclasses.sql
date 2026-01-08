@@ -657,3 +657,74 @@ where e.department_name=employee.department_name);
 
 select ename,salary,department_name from employee where salary = (select min(salary) from employee as e 
 where e.department_name=employee.department_name);
+
+-- DDL Statement 
+-- Data defination language 
+-- Create drop alter truncate
+
+
+use regex;
+create table test1(sno int );
+desc test1;
+insert into test1 values(1);
+select * from test1;
+insert into test1 values(2),(3),(null);
+select count(sno) from test1;
+select count(*) from test1;
+
+-- not null constraints 
+create table test2(sno int  not null ,salary int);
+insert into test2 values(1,1000);
+insert into test2 values(2,1000),(3,1500);
+insert into test2 values(null,1000);
+select * from test2;
+insert into test2 values(1,null);
+
+
+-- default constraint 
+
+create table test3(sno int  not null default 80 ,salary int);
+insert into test3(salary) values(1000);
+select * from test3;
+
+-- unique constraints
+create table test4(sno int  not null ,salary int unique);
+insert into test4(sno ,salary) values(1,1000);
+insert into test4(sno ,salary) values(1,1000);
+
+
+-- differnce b/w primary key and unique key 
+-- check constraint --> isme hum conditions dete h --> syntax:- check condition 
+create table test6(sno int , salary int,
+check (sno between 1 and 100),
+check(salary  in (1000,2000)));
+
+insert into test6 values(100,1000);
+insert into test6 values(111,2000);
+drop table test6;
+
+create table test6(sno int , salary int,
+constraint regex_test6_sno_chk check (sno between 1 and 100),
+constraint regex_test6_salary_chk check(salary  in (1000,2000)));
+
+insert into test6 values(100,1000);
+insert into test6 values(100,8000);
+
+
+-- ques create table name as employee with employee name , empid primary key  ,emailwith uniwue constaint
+-- ,college with the default value age with condition greater than 18 and gardian name should a b palindrome
+
+/*
+emp name
+empid primary key
+email unique
+college default
+age >18
+gardian palindrome
+*/
+create table employee1(empid int primary key ,emp_name varchar(20), email varchar(30) unique,
+college_name varchar(40) default 10 , age int check(age>18), Gardian_name varchar(20)check(name=reverse(name)));
+desc employee1;
+create table employee2(empid int primary key ,emp_name varchar(20), email varchar(30) unique,
+college_name varchar(40) default 10 , age int check(age>18), Gardian_name varchar(20)check(Gardian_name=reverse(Gardian_name)));
+
