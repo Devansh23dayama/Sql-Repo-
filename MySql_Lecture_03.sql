@@ -53,6 +53,7 @@ from country;
 -- SUBSTRING : pura naam position 1 se
 select name, substring(name, 1)
 from country;
+-- CONCAT joins strings, CONCAT_WS joins with separator, and NULLs are safely ignored.
 
 -- SUBSTRING & SUBSTR
 -- 2nd character se pura naam
